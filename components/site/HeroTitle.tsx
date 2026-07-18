@@ -1,16 +1,18 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import { Fragment } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { Fragment, useRef } from "react";
 
 const headline = "Most businesses don't have a website problem.";
 
 export function HeroTitle() {
   const reducedMotion = useReducedMotion();
+  const ref = useRef<HTMLHeadingElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.45 });
   let characterIndex = 0;
 
   return (
-    <h1 className="hero-title" aria-label={headline}>
+    <h1 className="hero-title" ref={ref} aria-label={headline}>
       {headline.split(" ").map((word, wordIndex) => (
         <Fragment key={`${word}-${wordIndex}`}>
           <span className="hero-title__word" aria-hidden="true">
@@ -20,7 +22,7 @@ export function HeroTitle() {
                 <motion.span
                   key={`${character}-${delayIndex}`}
                   initial={reducedMotion ? false : { y: "0.75em", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  animate={isInView ? { y: 0, opacity: 1 } : undefined}
                   transition={{
                     duration: reducedMotion ? 0 : 0.42,
                     delay: reducedMotion ? 0 : 0.14 + delayIndex * 0.018,

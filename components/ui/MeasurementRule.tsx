@@ -40,7 +40,7 @@ export function MeasurementRule() {
 
   return (
     <aside className="measurement-rule" aria-hidden="true">
-      {Array.from({ length: 7 }, (_, index) => (
+      {Array.from({ length: 8 }, (_, index) => (
         <span key={index} className={index === active ? "is-active" : undefined} />
       ))}
     </aside>

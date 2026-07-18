@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist_Mono, Inter } from "next/font/google";
+import { Geist_Mono, Manrope, Newsreader } from "next/font/google";
 
 import { AppShell } from "@/components/layout/AppShell";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const display = Newsreader({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
-const body = Inter({
+const body = Manrope({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 

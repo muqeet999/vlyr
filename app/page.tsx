@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { DiagnosticAnnotation } from "@/components/site/DiagnosticAnnotation";
+import { CinematicHero } from "@/components/site/CinematicHero";
 import { FieldNote } from "@/components/site/FieldNote";
 import { HeroTitle } from "@/components/site/HeroTitle";
 import { ProcessLoop } from "@/components/site/ProcessLoop";
@@ -20,7 +21,9 @@ const symptoms = [
 export default function Home() {
   return (
     <div className="home-page">
-      <section className="chapter hero" id="top" data-chapter>
+      <CinematicHero />
+
+      <section className="chapter hero" id="diagnosis" data-chapter>
         <div className="hero__inner">
           <SectionMark number="01" label="The Problem" />
           <p className="eyebrow">VLYR / Digital Growth Studio — Srinagar</p>

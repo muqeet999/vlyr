@@ -37,7 +37,7 @@ export function Navbar() {
   const hrefFor = (target: string) => (target.startsWith("#") && pathname !== "/" ? `/${target}` : target);
 
   return (
-    <header className={`navbar ${isScrolled ? "is-scrolled" : ""}`}>
+    <header className={`navbar ${pathname === "/" && !isScrolled ? "is-cinematic" : ""} ${isScrolled ? "is-scrolled" : ""}`}>
       <Link href="/" className="wordmark" aria-label="VLYR home" data-cursor="">
         VLYR
       </Link>
