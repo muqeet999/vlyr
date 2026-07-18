@@ -301,92 +301,55 @@ a {
 }
 
 .cinematic-hero {
-  --light-x: 50%;
-  --light-y: 38%;
   position: relative;
   display: grid;
   min-height: 100svh;
   overflow: hidden;
   place-items: center;
-  background: oklch(0.12 0.004 260);
+  background: #080909;
   color: oklch(0.94 0.004 260);
   isolation: isolate;
 }
 
-.cinematic-hero::before,
-.cinematic-hero::after {
+.cinematic-hero--light {
+  background: oklch(0.94 0.004 240);
+  color: oklch(0.16 0.004 260);
+}
+
+.cinematic-hero__canvas,
+.cinematic-hero__vignette {
   position: absolute;
-  z-index: -1;
-  content: "";
+  inset: 0;
+}
+
+.cinematic-hero__canvas {
+  z-index: -2;
   pointer-events: none;
 }
 
-.cinematic-hero::before {
-  inset: 0;
-  background: radial-gradient(circle at var(--light-x) var(--light-y), oklch(0.5 0.012 260 / 0.17), transparent 25%),
-    radial-gradient(ellipse at 50% 54%, oklch(0.3 0.006 260 / 0.28), transparent 43%);
-  transition: background-position 420ms var(--ease);
+.cinematic-hero__canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
-.cinematic-hero::after {
-  inset: 0;
-  background: radial-gradient(ellipse at center, transparent 18%, oklch(0.07 0.003 260 / 0.78) 100%);
-}
-
-.cinematic-hero__light {
-  position: absolute;
-  inset: 0;
+.cinematic-hero__vignette {
   z-index: -1;
-  opacity: 0.48;
-  background: linear-gradient(108deg, transparent 42%, oklch(0.82 0.006 260 / 0.11) 50%, transparent 58%);
-  transform: translateX(calc((var(--light-x) - 50%) * 0.12)) translateY(calc((var(--light-y) - 50%) * 0.08));
-  transition: transform 700ms var(--ease);
-}
-
-.cinematic-hero__field {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
   pointer-events: none;
+  background: radial-gradient(ellipse at 50% 46%, transparent 21%, oklch(0.03 0.002 260 / 0.78) 100%);
 }
 
-.tolerance-field {
-  position: relative;
-  width: min(330px, 64vw);
-  height: min(330px, 64vw);
-  opacity: 0.9;
+.cinematic-hero--light .cinematic-hero__vignette {
+  background: radial-gradient(ellipse at 50% 46%, transparent 31%, oklch(0.56 0.006 240 / 0.15) 100%);
 }
-
-.tolerance-field__rail,
-.tolerance-field__axis {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  transform-origin: center;
-}
-
-.tolerance-field__rail {
-  height: 1px;
-  margin-left: -1px;
-  background: linear-gradient(90deg, transparent, oklch(0.91 0.004 260 / 0.74) 22%, oklch(0.96 0.004 260) 50%, oklch(0.91 0.004 260 / 0.74) 78%, transparent);
-  box-shadow: 0 0 13px oklch(0.92 0.005 260 / 0.13);
-}
-
-.tolerance-field__axis {
-  background: oklch(0.92 0.004 260 / 0.13);
-}
-
-.tolerance-field__axis--x { width: 290px; height: 1px; margin-left: -145px; }
-.tolerance-field__axis--y { width: 1px; height: 290px; margin-top: -145px; }
 
 .cinematic-hero__identity {
   display: flex;
-  width: min(460px, 84vw);
+  position: relative;
+  z-index: 1;
+  width: min(500px, 84vw);
   flex-direction: column;
   align-items: center;
-  margin-top: clamp(210px, 33vh, 320px);
+  margin-top: clamp(260px, 35vh, 340px);
   text-align: center;
 }
 
@@ -399,25 +362,34 @@ a {
 
 .cinematic-hero__identity p {
   margin: 0;
-  font-size: clamp(1.8rem, 3.3vw, 3.1rem);
+  font-size: clamp(2.15rem, 4vw, 3.75rem);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.11em;
+  line-height: 0.9;
 }
 
 .cinematic-hero__identity span {
-  margin-top: 15px;
-  color: oklch(0.92 0.004 260 / 0.7);
+  margin-top: 17px;
+  color: oklch(0.92 0.004 260 / 0.68);
   font-size: 0.62rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
 .cinematic-hero__identity small {
-  margin-top: 22px;
-  color: oklch(0.92 0.004 260 / 0.58);
-  font-size: clamp(0.72rem, 0.9vw, 0.8rem);
-  line-height: 1.55;
-  letter-spacing: 0.02em;
+  margin-top: 25px;
+  color: oklch(0.92 0.004 260 / 0.62);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.15rem, 1.45vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+}
+
+.cinematic-hero--light .cinematic-hero__identity span,
+.cinematic-hero--light .cinematic-hero__identity small,
+.cinematic-hero--light .cinematic-hero__scroll {
+  color: oklch(0.24 0.004 260 / 0.7);
 }
 
 .cinematic-hero__scroll {
@@ -1249,10 +1221,11 @@ a {
   width: 8px;
   height: 8px;
   place-items: center;
-  border: 0 solid var(--foreground);
+  border: 0 solid #fff;
   border-radius: 50%;
-  background: var(--foreground);
-  color: var(--foreground);
+  background: #fff;
+  color: #fff;
+  mix-blend-mode: difference;
   opacity: 0;
   pointer-events: none;
   transform: translate3d(-100px, -100px, 0);
@@ -1272,7 +1245,7 @@ a {
   height: 42px;
   margin: -21px 0 0 -21px;
   border-width: 1px;
-  background: color-mix(in oklch, var(--background) 35%, transparent);
+  background: transparent;
 }
 
 .cursor span {
@@ -1307,16 +1280,8 @@ a {
     min-height: 100svh;
   }
 
-  .tolerance-field {
-    width: min(280px, 74vw);
-    height: min(280px, 74vw);
-  }
-
-  .tolerance-field__axis--x { width: 240px; margin-left: -120px; }
-  .tolerance-field__axis--y { height: 240px; margin-top: -120px; }
-
   .cinematic-hero__identity {
-    margin-top: min(50vw, 248px);
+    margin-top: min(56vw, 268px);
   }
 
   .cinematic-hero__identity p {
