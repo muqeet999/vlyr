@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { DiagnosticAnnotation } from "@/components/site/DiagnosticAnnotation";
-import { CinematicHero } from "@/components/site/CinematicHero";
 import { FieldNote } from "@/components/site/FieldNote";
 import { HeroTitle } from "@/components/site/HeroTitle";
 import { ProcessLoop } from "@/components/site/ProcessLoop";
@@ -21,9 +20,7 @@ const symptoms = [
 export default function Home() {
   return (
     <div className="home-page">
-      <CinematicHero />
-
-      <section className="chapter hero" id="diagnosis" data-chapter>
+      <section className="chapter hero" id="top" data-chapter>
         <div className="hero__inner">
           <SectionMark number="01" label="The Problem" />
           <p className="eyebrow">VLYR / Digital Growth Studio — Srinagar</p>
@@ -74,7 +71,6 @@ export default function Home() {
           <SectionMark number="05" label="Field Notes" />
           <h2>No case studies live yet. Here&apos;s the kind of thing we actually find:</h2>
         </div>
-        {/* Phase 2: interactive self-diagnostic quiz — not building this yet, a mediocre version would undercut the section above it. */}
         <div className="field-notes__list">
           <FieldNote index="01">
             A restaurant with a five-star reputation and a five-minute average reply time on the platform customers actually use
